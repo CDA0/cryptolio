@@ -34,12 +34,24 @@ class Home extends Component {
   }
 }
 
-class Profile extends Component {
+class Coins extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Profile
+          Coins
+        </Text>
+      </View>
+    )
+  }
+}
+
+class Settings extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Settings
         </Text>
       </View>
     )
@@ -60,18 +72,27 @@ export default class TabDemo extends Component {
           selectedTitleStyle={{color: "#3496f0"}}
           renderIcon={() => <Icon name="home" size={px2dp(22)} color="#666"/>}
           renderSelectedIcon={() => <Icon name="home" size={px2dp(22)} color="#3496f0"/>}
-          badgeText="1"
+          // badgeText="1"
           onPress={() => this.setState({selectedTab: 'home'})}>
           <Home/>
         </TabNavigator.Item>
         <TabNavigator.Item
-          selected={this.state.selectedTab === 'profile'}
-          title="Profile"
+          selected={this.state.selectedTab === 'coins'}
+          title="Coins"
           selectedTitleStyle={{color: "#3496f0"}}
-          renderIcon={() => <Icon name="user" size={px2dp(22)} color="#666"/>}
-          renderSelectedIcon={() => <Icon name="user" size={px2dp(22)} color="#3496f0"/>}
-          onPress={() => this.setState({selectedTab: 'profile'})}>
-          <Profile/>
+          renderIcon={() => <Icon name="briefcase" size={px2dp(22)} color="#666"/>}
+          renderSelectedIcon={() => <Icon name="briefcase" size={px2dp(22)} color="#3496f0"/>}
+          onPress={() => this.setState({selectedTab: 'coins'})}>
+          <Coins/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          selected={this.state.selectedTab === 'settings'}
+          title="Settings"
+          selectedTitleStyle={{color: "#3496f0"}}
+          renderIcon={() => <Icon name="cog" size={px2dp(22)} color="#666"/>}
+          renderSelectedIcon={() => <Icon name="cog" size={px2dp(22)} color="#3496f0"/>}
+          onPress={() => this.setState({selectedTab: 'settings'})}>
+          <Settings/>
         </TabNavigator.Item>
       </TabNavigator>
     );
