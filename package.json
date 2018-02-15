@@ -9,6 +9,8 @@
     "emulator:run": "react-native run-android",
     "emulator:run-ios": "react-native run-ios",
     "test": "jest",
+    "test:update-snapshots": "jest -u",
+    "test:watch": "jest --watch",
     "lint": "eslint src --fix"
   },
   "dependencies": {

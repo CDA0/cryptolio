@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<TabNavigator
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#F5FCFF",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <TabNavigatorItem
+    onPress={[Function]}
+    renderIcon={[Function]}
+    renderSelectedIcon={[Function]}
+    selected={true}
+    selectedTitleStyle={
+      Object {
+        "color": "#3496f0",
+      }
+    }
+    title="Home"
+  >
+    <Home />
+  </TabNavigatorItem>
+  <TabNavigatorItem
+    onPress={[Function]}
+    renderIcon={[Function]}
+    renderSelectedIcon={[Function]}
+    selected={false}
+    selectedTitleStyle={
+      Object {
+        "color": "#3496f0",
+      }
+    }
+    title="Coins"
+  >
+    <Coins />
+  </TabNavigatorItem>
+  <TabNavigatorItem
+    onPress={[Function]}
+    renderIcon={[Function]}
+    renderSelectedIcon={[Function]}
+    selected={false}
+    selectedTitleStyle={
+      Object {
+        "color": "#3496f0",
+      }
+    }
+    title="Settings"
+  >
+    <Settings />
+  </TabNavigatorItem>
+</TabNavigator>
+`;
