@@ -7,11 +7,12 @@
     "emulator": "/usr/local/share/android-sdk/tools/emulator -avd test -no-snapshot-load",
     "emulator:create": "avdmanager create avd -n test -k \"system-images;android-27;google_apis;x86\"",
     "emulator:run": "react-native run-android",
-    "emulator:run-ios": "react-native run-ios",
+    "dev:ios": "react-native run-ios",
     "test": "jest",
     "test:update-snapshots": "jest -u",
     "test:watch": "jest --watch",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --fix",
+    "precommit": "lint-staged && npm run test"
   },
   "dependencies": {
     "react": "16.2.0",
@@ -29,11 +30,16 @@
     "eslint-config-semipretty": "^1.0.0",
     "eslint-plugin-jest": "^21.12.1",
     "eslint-plugin-react": "^7.6.1",
+    "husky": "^0.14.3",
     "jest": "22.1.4",
+    "lint-staged": "^6.1.0",
     "prettier": "^1.10.2",
     "react-test-renderer": "16.2.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "lint-staged": {
+    "*.js": ["npm run lint"]
   }
 }

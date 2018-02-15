@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Dimensions } from 'react-native';
@@ -42,7 +42,7 @@ class Settings extends Component {
   }
 }
 
-export default class TabDemo extends Component {
+class Cryptolio extends Component {
   state = {
     selectedTab: 'home',
   };
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('TabDemo', () => TabDemo);
+export default Cryptolio;
