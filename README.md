@@ -18,3 +18,9 @@ sdkmanager "platform-tools" "platforms;android-27" "extras;intel;Hardware_Accele
 avdmanager create avd -n test -k "system-images;android-27;google_apis;x86"
 
 /usr/local/share/android-sdk/tools/emulator -avd test
+
+
+How to run on iOS Simulator
+---------------------------
+
+`yarn emulator:run-ios`

@@ -7,6 +7,7 @@
     "emulator": "/usr/local/share/android-sdk/tools/emulator -avd test -no-snapshot-load",
     "emulator:create": "avdmanager create avd -n test -k \"system-images;android-27;google_apis;x86\"",
     "emulator:run": "react-native run-android",
+    "emulator:run-ios": "react-native run-ios",
     "test": "jest"
   },
   "dependencies": {
