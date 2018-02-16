@@ -15,13 +15,17 @@
     "precommit": "lint-staged && npm run test"
   },
   "dependencies": {
+    "@std/esm": "^0.21.7",
+    "axios": "^0.17.1",
+    "bitcoin": "^3.0.1",
     "react": "16.2.0",
     "react-native": "0.52.2",
     "react-native-local-auth": "^1.5.0",
     "react-native-tab-navigator": "^0.3.4",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0",
-    "styled-components": "^3.1.6"
+    "styled-components": "^3.1.6",
+    "web3": "^1.0.0-beta.30"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
