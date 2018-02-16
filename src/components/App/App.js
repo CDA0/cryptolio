@@ -1,66 +1,38 @@
-import React, { Component } from 'react';
-import TabNavigator from 'react-native-tab-navigator';
+import { TabNavigator } from 'react-navigation';
 
 import HomeScreen from '../HomeScreen/HomeScreen';
 import CoinsScreen from '../CoinsScreen/CoinsScreen';
 import SettingsScreen from '../SettingsScreen/SettingsScreen';
-import TabIcon from '../TabIcon/TabIcon';
-import { LIGHT_BLUE } from '../../services/colors';
+import { getTabBarIcon } from '../TabIcon/TabIcon';
+import { LIGHT_BLUE, DARK_GREY } from '../../services/colors';
 
-class Cryptolio extends Component {
-  state = {
-    selectedTab: 'home',
-  };
-
-  render() {
-    const { selectedTab } = this.state;
-
-    return (
-      <TabNavigator>
-        <TabNavigator.Item
-          selected={selectedTab === 'home'}
-          title="Home"
-          selectedTitleStyle={{ color: LIGHT_BLUE }}
-          renderIcon={() => <TabIcon name="home" />}
-          renderSelectedIcon={() => <TabIcon name="home" selected />}
-          // badgeText="1"
-          onPress={() => this.setState({ selectedTab: 'home' })}
-        >
-          <HomeScreen />
-        </TabNavigator.Item>
-
-        <TabNavigator.Item
-          selected={selectedTab === 'coins'}
-          title="Coins"
-          selectedTitleStyle={{ color: LIGHT_BLUE }}
-          renderIcon={() => <TabIcon name="briefcase" />}
-          renderSelectedIcon={() => <TabIcon name="briefcase" selected />}
-          onPress={() => this.setState({ selectedTab: 'coins' })}
-        >
-          <CoinsScreen />
-        </TabNavigator.Item>
-
-        <TabNavigator.Item
-          selected={selectedTab === 'settings'}
-          title="Settings"
-          selectedTitleStyle={{ color: LIGHT_BLUE }}
-          renderIcon={() => <TabIcon name="cog" />}
-          renderSelectedIcon={() => <TabIcon name="cog" selected />}
-          onPress={() => this.setState({ selectedTab: 'settings' })}
-        >
-          <SettingsScreen />
-        </TabNavigator.Item>
-      </TabNavigator>
-    );
+const Cryptolio = TabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: getTabBarIcon('home'),
+      }),
+    },
+    Coins: {
+      screen: CoinsScreen,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: getTabBarIcon('briefcase'),
+      }),
+    },
+    Settings: {
+      screen: SettingsScreen,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: getTabBarIcon('cog'),
+      }),
+    },
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: LIGHT_BLUE,
+      inactiveTintColor: DARK_GREY,
+    },
   }
-}
-
-// const styles = StyleSheet.create({
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
+);
 
 export default Cryptolio;
