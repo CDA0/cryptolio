@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import StyledView from '../StyledView/StyledView';
-import StyledText from '../StyledText/StyledText';
+import CoinsList from '../CoinsList/CoinsList';
 import { setSelectedTab } from '../../state/entities/tabs/actions';
 
 class CoinsScreen extends Component {
@@ -16,7 +16,7 @@ class CoinsScreen extends Component {
   render() {
     return (
       <StyledView>
-        <StyledText>Coins</StyledText>
+        <CoinsList />
       </StyledView>
     );
   }
