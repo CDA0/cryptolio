@@ -12,7 +12,8 @@
     "test:update-snapshots": "jest -u",
     "test:watch": "jest --watch",
     "lint": "eslint src --fix",
-    "precommit": "lint-staged && npm run test"
+    "precommit": "lint-staged && npm run test",
+    "devtools": "open \"rndebugger://set-debugger-loc?host=localhost&port=8081\""
   },
   "dependencies": {
     "react": "16.2.0",
