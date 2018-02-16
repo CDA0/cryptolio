@@ -1,40 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders 1`] = `
-<Navigator
-  navigation={
+<Provider
+  store={
     Object {
-      "addListener": [Function],
       "dispatch": [Function],
-      "goBack": [Function],
-      "navigate": [Function],
-      "pop": [Function],
-      "popToTop": [Function],
-      "push": [Function],
-      "replace": [Function],
-      "setParams": [Function],
-      "state": Object {
-        "index": 0,
-        "isTransitioning": false,
-        "routes": Array [
-          Object {
-            "key": "Home",
-            "params": undefined,
-            "routeName": "Home",
-          },
-          Object {
-            "key": "Coins",
-            "params": undefined,
-            "routeName": "Coins",
-          },
-          Object {
-            "key": "Settings",
-            "params": undefined,
-            "routeName": "Settings",
-          },
-        ],
-      },
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
     }
   }
-/>
+>
+  <NavigationContainer />
+</Provider>
 `;

@@ -5,8 +5,9 @@ import CoinsScreen from '../CoinsScreen/CoinsScreen';
 import SettingsScreen from '../SettingsScreen/SettingsScreen';
 import { getTabBarIcon } from '../TabIcon/TabIcon';
 import { LIGHT_BLUE, DARK_GREY } from '../../services/colors';
+import withStore from '../withStore/withStore';
 
-const Cryptolio = TabNavigator(
+const App = TabNavigator(
   {
     Home: {
       screen: HomeScreen,
@@ -35,4 +36,5 @@ const Cryptolio = TabNavigator(
   }
 );
 
-export default Cryptolio;
+export { App };
+export default withStore(App);
