@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import entities from './entities/reducers';
+import tabs from './tabs/reducers';
 
 export default combineReducers({
-  entities,
+  tabs,
 });

@@ -42,10 +42,8 @@ How to install React Native debugging tools
 brew update && brew cask install react-native-debugger
 ```
 
-How to use debugging React Native debugging tools
+How to use React Native debugging tools
 -------------------------------------------------
-- While the app is running, press Cmd-D to open the internal dev tools
+- While the app is running, run `yarn devtools`
+- Press Cmd-D to open the internal dev tools
 - Click on Debug JS Remotely
-- Wait for app to reload once debugging session is active
-- Close the browser window that opens
-- Run `yarn devtools`
