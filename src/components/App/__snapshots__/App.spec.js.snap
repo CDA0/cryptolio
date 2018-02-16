@@ -1,16 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders 1`] = `
-<TabNavigator
-  style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#F5FCFF",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
->
+<TabNavigator>
   <TabNavigatorItem
     onPress={[Function]}
     renderIcon={[Function]}
@@ -23,7 +14,7 @@ exports[`renders 1`] = `
     }
     title="Home"
   >
-    <Home />
+    <HomeScreen />
   </TabNavigatorItem>
   <TabNavigatorItem
     onPress={[Function]}
@@ -37,7 +28,7 @@ exports[`renders 1`] = `
     }
     title="Coins"
   >
-    <Coins />
+    <CoinsScreen />
   </TabNavigatorItem>
   <TabNavigatorItem
     onPress={[Function]}
@@ -51,7 +42,7 @@ exports[`renders 1`] = `
     }
     title="Settings"
   >
-    <Settings />
+    <SettingsScreen />
   </TabNavigatorItem>
 </TabNavigator>
 `;

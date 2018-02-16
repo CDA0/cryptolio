@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './src/App/App';
+import App from './src/components/App/App';
 
 AppRegistry.registerComponent('cryptolio', () => App);
