@@ -5,7 +5,7 @@ import { GREY } from '../../services/colors';
 
 const CryptoCurrencyValue = styled(Text)`
   align-self: flex-end;
-  color: ${GREY};
+  color: ${props => props.color || GREY};
   font-size: 14;
   font-weight: 300;
 `;

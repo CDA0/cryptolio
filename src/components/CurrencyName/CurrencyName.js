@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { GREY } from '../../services/colors';
 
 const CurrencyName = styled(Text)`
-  color: ${GREY};
+  color: ${props => props.color || GREY};
   font-size: 14;
   font-weight: bold;
 `;

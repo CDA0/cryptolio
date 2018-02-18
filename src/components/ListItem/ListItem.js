@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { View } from 'react-native';
 
 import getIcon from '../../services/getIcon';
+import cryptoColors from '../../services/cryptoColors';
 import CurrencyName from '../CurrencyName/CurrencyName';
 import CryptoCurrencyValue from '../CryptoCurrencyValue/CryptoCurrencyValue';
 import IconImage from '../IconImage/IconImage';
@@ -31,7 +32,9 @@ const ListItem = ({
     </CurrencyAndIcon>
 
     <CoinValue>
-      <PrimaryCurrencyValue>{primaryCurrencyValue}</PrimaryCurrencyValue>
+      <PrimaryCurrencyValue color={cryptoColors[iconName]}>
+        {primaryCurrencyValue}
+      </PrimaryCurrencyValue>
 
       {consistsOf.map(({ key, value }, itemIndex) => (
         <CryptoCurrencyValue key={key}>
