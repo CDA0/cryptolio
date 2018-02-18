@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Image, Text, View } from 'react-native';
-import styled from 'styled-components';
+import { SectionList } from 'react-native';
+
+import ListHeaderItem from '../ListHeaderItem/ListHeaderItem';
+import ListItem from '../ListItem/ListItem';
 
 // TODO: Replace with API call to https://blockchain.info/ticker?cors=true
 const mockCurrencyMap = {
@@ -168,126 +170,79 @@ const convertToPrimaryCurrency = (value, currency = 'USD') => {
   return `$${rounded}`;
 };
 
-// TODO: Remove this mockData after pulling data from real APIs
-const mockData = [
+const mockCoinbaseData = [
   {
-    name: 'Bitcoin',
+    currencyName: 'Bitcoin',
+    currencySymbol: 'BTC',
     tickerSymbol: 'btc',
-    key: 'btc',
-    symbol: 'BTC',
     value: '0.23152523',
   },
   {
-    name: 'Bitcoin Cash',
+    currencyName: 'Bitcoin Cash',
+    currencySymbol: 'BCH',
     tickerSymbol: 'bch',
-    key: 'bch',
-    symbol: 'BCH',
     value: '0.91233902',
   },
   {
-    name: 'Ethereum',
+    currencyName: 'Ethereum',
+    currencySymbol: 'ETH',
     tickerSymbol: 'eth',
-    key: 'eth',
-    symbol: 'ETH',
     value: '3.69889398',
   },
   {
-    name: 'Neo',
+    currencyName: 'Neo',
+    currencySymbol: 'NEO',
     tickerSymbol: 'neo',
-    key: 'neo',
-    symbol: 'NEO',
     value: '5.04930180',
   },
 ];
 
-const getIcon = tickerSymbol => {
-  return {
-    btc: () => require(`../../images/icons/btc.png`),
-    eth: () => require(`../../images/icons/eth.png`),
-    bch: () => require(`../../images/icons/bch.png`),
-    neo: () => require(`../../images/icons/neo.png`),
-  }[tickerSymbol]();
-};
+const getItemDataForWallet = ({
+  currencyName,
+  currencySymbol,
+  tickerSymbol,
+  value,
+}) => ({
+  currencyName,
+  iconName: tickerSymbol,
+  key: currencySymbol,
+  primaryCurrencyValue: convertToPrimaryCurrency(value),
+  consistsOf: [{ value: `${value} ${currencySymbol}`, key: currencySymbol }],
+});
 
-const StyledCoinWrapper = styled(View)`
-  border-top-color: #ddd;
-  border-top-width: 0.5;
-  margin-top: 3px;
-  padding: 12px;
-  align-items: stretch;
-  justify-content: space-between;
+// TODO: Remove this mockSections after pulling data from real APIs
+const mockSections = [
+  {
+    title: 'Total',
+    data: [
+      {
+        key: 'total',
+        primaryCurrencyValue: '$109,629.78',
+        consistsOf: [
+          { value: '0.23152523 BTC', key: 'BTC' },
+          { value: '3.69889398 ETH', key: 'ETH' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Coinbase: fakeaccount@hotmail.com',
+    data: [...mockCoinbaseData.map(getItemDataForWallet)],
+  },
+];
 
-  border-bottom-color: #ddd;
-  border-bottom-width: 0.5;
-`;
-
-const PrimaryCurrencyValue = styled(Text)`
-  color: #333;
-  font-size: 38;
-  font-weight: 300;
-`;
-
-const CryptoCurrencyValue = styled(Text)`
-  color: #333;
-  font-size: 12;
-  font-weight: 300;
-  align-self: flex-end;
-`;
-
-const IconImage = styled(Image)`
-  height: 28;
-  opacity: 0.75;
-  width: 28;
-`;
-
-const CurrencyAndIcon = styled(View)`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const CoinValue = styled(View)`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const CurrencyName = styled(Text)`
-  color: #999;
-  font-size: 14px;
-  font-weight: bold;
-`;
-
-const CoinItem = ({ name, value, symbol, tickerSymbol }) => (
-  <StyledCoinWrapper>
-    <CurrencyAndIcon>
-      <CurrencyName>{name}</CurrencyName>
-      <IconImage source={getIcon(tickerSymbol)} />
-    </CurrencyAndIcon>
-
-    <CoinValue>
-      <PrimaryCurrencyValue>
-        {convertToPrimaryCurrency(value)}
-      </PrimaryCurrencyValue>
-
-      <CryptoCurrencyValue>
-        {value} {symbol}
-      </CryptoCurrencyValue>
-    </CoinValue>
-  </StyledCoinWrapper>
-);
-
-CoinItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  symbol: PropTypes.string.isRequired,
-  tickerSymbol: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-};
-
-const CoinsList = ({ data = mockData }) => (
-  <FlatList data={data} renderItem={({ item }) => <CoinItem {...item} />} />
+const CoinsList = ({ sections = mockSections }) => (
+  <SectionList
+    sections={sections}
+    renderItem={({ item }) => <ListItem {...item} />}
+    renderSectionHeader={({ section }) => (
+      <ListHeaderItem title={section.title} />
+    )}
+  />
 );
 
 CoinsList.propTypes = {
-  data: PropTypes.array,
+  sections: PropTypes.array,
 };
 
 export default CoinsList;

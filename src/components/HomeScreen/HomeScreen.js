@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import StyledView from '../StyledView/StyledView';
+import ScreenWrapper from '../ScreenWrapper/ScreenWrapper';
 import StyledText from '../StyledText/StyledText';
 import { setSelectedTab } from '../../state/entities/tabs/actions';
 
@@ -15,9 +15,9 @@ class HomeScreen extends Component {
 
   render() {
     return (
-      <StyledView>
+      <ScreenWrapper>
         <StyledText>Home</StyledText>
-      </StyledView>
+      </ScreenWrapper>
     );
   }
 }
