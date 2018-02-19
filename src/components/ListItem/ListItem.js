@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { View } from 'react-native';
 
+import formatNumber from '../../services/formatNumber';
 import getIcon from '../../services/getIcon';
 import cryptoColors from '../../services/cryptoColors';
 import CurrencyName from '../CurrencyName/CurrencyName';
@@ -38,7 +39,7 @@ const ListItem = ({
       <PrimaryCurrencyValue
         color={currencySymbol && cryptoColors[currencySymbol.toLowerCase()]}
       >
-        {`${primaryCurrencySymbol}${primaryCurrencyValue}`}
+        {`${primaryCurrencySymbol}${formatNumber(primaryCurrencyValue)}`}
       </PrimaryCurrencyValue>
 
       {consistsOf.map(({ value, currencySymbol }, itemIndex) => (
@@ -47,7 +48,7 @@ const ListItem = ({
           color={showCryptoColors && cryptoColors[currencySymbol.toLowerCase()]}
         >
           {itemIndex > 0 && `+ `}
-          {`${value} ${currencySymbol}`}
+          {`${formatNumber(value, undefined, 8)} ${currencySymbol}`}
         </CryptoCurrencyValue>
       ))}
     </CoinValue>
@@ -60,9 +61,9 @@ ListItem.propTypes = {
   currencySymbol: PropTypes.string,
   iconName: PropTypes.string,
   primaryCurrencySymbol: PropTypes.string,
-  primaryCurrencyValue: PropTypes.string,
+  primaryCurrencyValue: PropTypes.number,
   showCryptoColors: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.number,
 };
 
 ListItem.defaultProps = {
