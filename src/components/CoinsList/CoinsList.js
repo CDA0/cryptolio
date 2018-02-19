@@ -170,6 +170,22 @@ const convertToPrimaryCurrency = (value, currency = 'GBP') => {
   return primaryCurrencyValue;
 };
 
+const getItemDataForWallet = ({
+  currencyName,
+  currencySymbol,
+  tickerSymbol,
+  value,
+}) => ({
+  currencyName,
+  iconName: tickerSymbol,
+  key: currencySymbol,
+  primaryCurrencySymbol: '£',
+  primaryCurrencyValue: convertToPrimaryCurrency(value),
+  value,
+  consistsOf: [{ value, currencySymbol }],
+  currencySymbol,
+});
+
 const coinbaseWalletData = [
   {
     currencyName: 'Bitcoin',
@@ -197,21 +213,38 @@ const coinbaseWalletData = [
   },
 ];
 
-const getItemDataForWallet = ({
-  currencyName,
-  currencySymbol,
-  tickerSymbol,
-  value,
-}) => ({
-  currencyName,
-  iconName: tickerSymbol,
-  key: currencySymbol,
-  primaryCurrencySymbol: '£',
-  primaryCurrencyValue: convertToPrimaryCurrency(value),
-  value,
-  consistsOf: [{ value, currencySymbol }],
-  currencySymbol,
-});
+const coinbaseWalletWithPrimaryCurrency = coinbaseWalletData.map(
+  getItemDataForWallet
+);
+
+const coinbaseWalletSection = {
+  title: 'Coinbase: fakeaccount@hotmail.com',
+  data: coinbaseWalletWithPrimaryCurrency,
+};
+
+const binanceWalletData = [
+  {
+    currencyName: 'Bitcoin',
+    currencySymbol: 'BTC',
+    tickerSymbol: 'btc',
+    value: 0.09013392,
+  },
+  {
+    currencyName: 'Ethereum',
+    currencySymbol: 'ETH',
+    tickerSymbol: 'eth',
+    value: 2.01928372,
+  },
+];
+
+const binanceWalletWithPrimaryCurrency = binanceWalletData.map(
+  getItemDataForWallet
+);
+
+const binanceWalletSection = {
+  title: 'Binance: anotheraccount@hotmail.com',
+  data: binanceWalletWithPrimaryCurrency,
+};
 
 const sortByPrimaryCurrencyValue = data =>
   [...data].sort(
@@ -221,15 +254,44 @@ const sortByPrimaryCurrencyValue = data =>
   );
 
 const getTotalSection = wallets => {
-  const coinBalances = wallets[0].data;
+  const allCoinBalances = wallets.reduce(
+    (acc, wallet) => [...acc, ...wallet.data],
+    []
+  );
+
+  const allCurrencies = allCoinBalances.map(
+    coinBalance => coinBalance.currencySymbol
+  );
+
+  const uniqueCurrencies = [...new Set(allCurrencies)];
+
+  const uniqueCoinBalances = uniqueCurrencies.map(currency => {
+    const balancesForCurrency = allCoinBalances.filter(
+      balance => balance.currencySymbol === currency
+    );
+
+    return balancesForCurrency.reduce(
+      (acc, balance) => ({
+        ...balance,
+        primaryCurrencyValue:
+          acc.primaryCurrencyValue + balance.primaryCurrencyValue,
+        value: acc.value + balance.value,
+      }),
+      {
+        primaryCurrencyValue: 0,
+        value: 0,
+      }
+    );
+  });
+
   // Should merge data here, to combine all entries for a currency into one row
 
-  const totalBalance = coinBalances.reduce(
+  const totalBalance = uniqueCoinBalances.reduce(
     (acc, coinBalance) => acc + parseFloat(coinBalance.primaryCurrencyValue),
     0
   );
 
-  const sortedCoinBalances = sortByPrimaryCurrencyValue(coinBalances);
+  const sortedCoinBalances = sortByPrimaryCurrencyValue(uniqueCoinBalances);
 
   return {
     title: 'Total',
@@ -245,19 +307,11 @@ const getTotalSection = wallets => {
   };
 };
 
-const coinbaseWalletWithPrimaryCurrency = coinbaseWalletData.map(
-  getItemDataForWallet
-);
-
-const coinbaseWalletSection = {
-  title: 'Coinbase: fakeaccount@hotmail.com',
-  data: coinbaseWalletWithPrimaryCurrency,
-};
-
 // TODO: Remove this mockSections after pulling data from real APIs
 const mockSections = [
-  { ...getTotalSection([coinbaseWalletSection]) },
+  { ...getTotalSection([coinbaseWalletSection, binanceWalletSection]) },
   { ...coinbaseWalletSection },
+  { ...binanceWalletSection },
 ];
 
 const CoinsList = ({ sections = mockSections }) => (
