@@ -21,9 +21,12 @@ const CoinValue = styled(View)`
 
 const ListItem = ({
   consistsOf,
+  currencySymbol,
   currencyName,
   iconName,
+  primaryCurrencySymbol,
   primaryCurrencyValue,
+  showCryptoColors,
 }) => (
   <StyledListItemWrapper>
     <CurrencyAndIcon>
@@ -32,14 +35,19 @@ const ListItem = ({
     </CurrencyAndIcon>
 
     <CoinValue>
-      <PrimaryCurrencyValue color={cryptoColors[iconName]}>
-        {primaryCurrencyValue}
+      <PrimaryCurrencyValue
+        color={currencySymbol && cryptoColors[currencySymbol.toLowerCase()]}
+      >
+        {`${primaryCurrencySymbol}${primaryCurrencyValue}`}
       </PrimaryCurrencyValue>
 
-      {consistsOf.map(({ key, value }, itemIndex) => (
-        <CryptoCurrencyValue key={key}>
+      {consistsOf.map(({ value, currencySymbol }, itemIndex) => (
+        <CryptoCurrencyValue
+          key={currencySymbol}
+          color={showCryptoColors && cryptoColors[currencySymbol.toLowerCase()]}
+        >
           {itemIndex > 0 && `+ `}
-          {value}
+          {`${value} ${currencySymbol}`}
         </CryptoCurrencyValue>
       ))}
     </CoinValue>
@@ -49,13 +57,17 @@ const ListItem = ({
 ListItem.propTypes = {
   consistsOf: PropTypes.array,
   currencyName: PropTypes.string,
+  currencySymbol: PropTypes.string,
   iconName: PropTypes.string,
+  primaryCurrencySymbol: PropTypes.string,
   primaryCurrencyValue: PropTypes.string,
+  showCryptoColors: PropTypes.bool,
   value: PropTypes.string,
 };
 
 ListItem.defaultProps = {
   consistsOf: [],
+  showCryptoColors: false,
 };
 
 export default ListItem;

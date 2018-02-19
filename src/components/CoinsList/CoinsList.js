@@ -167,7 +167,7 @@ const convertToPrimaryCurrency = (value, currency = 'USD') => {
   const primaryCurrencyValue =
     parseFloat(value) * mockCurrencyMap[currency]['15m'];
   const rounded = primaryCurrencyValue.toFixed(2);
-  return `$${rounded}`;
+  return `${rounded}`;
 };
 
 const mockCoinbaseData = [
@@ -206,28 +206,53 @@ const getItemDataForWallet = ({
   currencyName,
   iconName: tickerSymbol,
   key: currencySymbol,
+  primaryCurrencySymbol: '$',
   primaryCurrencyValue: convertToPrimaryCurrency(value),
-  consistsOf: [{ value: `${value} ${currencySymbol}`, key: currencySymbol }],
+  value,
+  consistsOf: [{ value, currencySymbol }],
+  currencySymbol,
 });
 
-// TODO: Remove this mockSections after pulling data from real APIs
-const mockSections = [
-  {
+const getTotalSection = wallets => {
+  const data = wallets[0].data;
+  // Should merge rows here, to combine all entries for a currency into one row
+
+  const sortedData = [...data].sort(
+    (item1, item2) =>
+      parseInt(item1.primaryCurrencyValue) <
+      parseInt(item2.primaryCurrencyValue)
+  );
+
+  return {
     title: 'Total',
     data: [
       {
         key: 'total',
-        primaryCurrencyValue: '$109,629.78',
-        consistsOf: [
-          { value: '0.23152523 BTC', key: 'BTC' },
-          { value: '3.69889398 ETH', key: 'ETH' },
-        ],
+        primaryCurrencySymbol: '$',
+        primaryCurrencyValue: '109629.78',
+        consistsOf: sortedData,
+        showCryptoColors: true,
       },
     ],
+  };
+};
+
+const coinbaseDataWithPrimaryCurrency = mockCoinbaseData.map(
+  getItemDataForWallet
+);
+
+const dataSections = {
+  title: 'Coinbase: fakeaccount@hotmail.com',
+  data: coinbaseDataWithPrimaryCurrency,
+};
+
+// TODO: Remove this mockSections after pulling data from real APIs
+const mockSections = [
+  {
+    ...getTotalSection([dataSections]),
   },
   {
-    title: 'Coinbase: fakeaccount@hotmail.com',
-    data: [...mockCoinbaseData.map(getItemDataForWallet)],
+    ...dataSections,
   },
 ];
 
