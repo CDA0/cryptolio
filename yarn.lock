@@ -4377,6 +4377,10 @@ react-native-local-auth@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/react-native-local-auth/-/react-native-local-auth-1.5.0.tgz#66fe93eee91a55a55490f2f6f5c3f8d0138aae42"
 
+react-native-platform-touchable@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
+
 react-native-safe-area-view@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.6.0.tgz#ce01eb27905a77780219537e0f53fe9c783a8b3d"
@@ -4455,6 +4459,12 @@ react-native@0.52.2:
     xcode "^0.9.1"
     xmldoc "^0.4.0"
     yargs "^9.0.0"
+
+react-navigation-header-buttons@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-0.0.4.tgz#90dd7617aec31eeb35c600eb90afe40f9b0dc43b"
+  dependencies:
+    react-native-platform-touchable "^1.1.1"
 
 react-navigation@^1.0.3:
   version "1.0.3"

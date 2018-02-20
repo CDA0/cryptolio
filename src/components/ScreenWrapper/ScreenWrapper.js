@@ -6,7 +6,6 @@ const ScreenWrapper = styled(View)`
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  padding-top: 22;
 `;
 
 export default ScreenWrapper;
