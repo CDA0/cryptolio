@@ -10,8 +10,6 @@ const signedRequest = async (url, key, secret, queryParams = {}, method = 'GET',
   queryParams.timestamp = new Date().getTime() + 1000;
   const querystring = qs.stringify(queryParams);
   const signature = crypto.createHmac('sha256', secret).update(querystring).digest('hex');
-  console.log(signature)
-  console.log( `${url}?${querystring}&signature=${signature}`)
   const { data } = await axios({
     url: `${url}?${querystring}&signature=${signature}`,
     method,

@@ -8,7 +8,6 @@ const BALANCES_ENDPOINT = '/v1/account/balances';
 const signedRequest = async (url, queryParams = {}, headers = {}, method = 'GET', timeout = 5000) => {
   const querystring = qs.stringify(queryParams);
   const nonce = new Date().getTime();
-  console.log(url, querystring)
   const { data } = await axios({
     url: `${url}?${querystring}`,
     method,
